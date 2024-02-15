@@ -1,4 +1,10 @@
 <?php
     session_start();
 
-    echo "Третья страница была открыта " . $_SESSION['page_count'] . " раз.";
+    if(isset($_SESSION['page_count'])) {
+        $countOpen = $_SESSION['page_count'];
+    } else {
+        $countOpen = 0;
+    }
+
+    echo "Третья страница была открыта " . $countOpen . " раз.";
