@@ -10,10 +10,10 @@
     <div class="mainContainer">
         <form class="mainForm" action="post.php" method="post" >
             <h1>Введите данные пользователя</h1>
-            <input name="user_name" class="inputText" type="text" placeholder="Введите имя">
             <input name="user_firstname" class="inputText" type="text" placeholder="Введите фамилию">
+            <input name="user_name" class="inputText" type="text" placeholder="Введите имя">
             <input name="user_secondName" class="inputText" type="text" placeholder="Введите отчество">
-            <button class="glow-on-hover" type="submit">Сохранить пользователя</button>
+            <button class="glow-on-hover" type="submit">Проверить данные</button>
         </form>
     </div>
 </body>
