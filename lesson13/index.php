@@ -3,11 +3,30 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Домашка</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<title></title>
+
 </head>
 <body>
-	<form method="POST">
+<?php
+    // выводим запрос построчно
+    echo "<pre>";
+    var_dump($_REQUEST);
+    echo "</pre>";
+
+    // формируем массив по ключам
+    $arUserInfo = array("name"=>$_REQUEST['user_name'], 
+    "secondName"=>$_REQUEST['user_second_name'],
+    "lastName"=>$_REQUEST['user_last_name'], 
+    "сity"=>$_REQUEST['user_city'], 
+    "street"=>$_REQUEST['user_street'], 
+    "home"=>$_REQUEST['user_home'], 
+    "apartments"=>$_REQUEST['user_apartment']);
+
+    // кодируем в json
+    $strUserInfo = json_encode($arUserInfo, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+?>
+
+<form action="index.php" method="post">
 		<strong>Ваше имя<span class="mf-req">*</span></strong><br>
 		<input type="text" name="user_name" id="user_name" value=""><br>
 
@@ -31,30 +50,13 @@
 
 		<input type="submit" name="submit" id="submit" value="Отправить">
 	</form>
+    <!-- выводим резулитат -->
     <div id="result">
-        <!-- выводим json -->
+        <?php
+            echo '<pre>';
+            var_dump($strUserInfo);
+            echo '</pre>';
+        ?>
     </div>
-    <script>
-        $(document).ready(function() {
-            $("form").submit(function(event) {
-                event.preventDefault();
-                var formData = new FormData($(this)[0]);
-
-                $.ajax({
-                    type: "POST",
-                    url: "sentDate.php",
-                    data: formData,
-                    dataType: "json",
-                    contentType: false,
-                    processData: false
-                }).done(function(result) {
-                    $("#result").html(
-                        '<p>Полученные данные json: ' + '<pre>' + JSON.stringify(result, null, 2) + '</pre>' + '</p>'
-                    );
-
-                });
-            });
-        });
-    </script>
 </body>
 </html>
